@@ -1,0 +1,64 @@
+.contenedor-principal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.encabezado {
+  text-align: center;
+  margin-top: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: 1.1rem;
+    color: var(--ion-color-medium);
+  }
+}
+
+.cuadricula-materias {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 2rem 0;
+
+  .tarjeta-materia {
+    border-radius: 12px;
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    
+    /* Aquí luego pondrás tus background-image reales */
+    &.matematica { background-color: #3b82f6; }
+    &.lenguaje { background-color: #ef4444; }
+    &.ciencias { background-color: #10b981; }
+    &.sociales { background-color: #f59e0b; }
+
+    span {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 4px 8px;
+      border-radius: 6px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.contenedor-botones {
+  margin-bottom: 2rem;
+  
+  ion-button {
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,60 @@
+.contenedor-formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 10px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+}
+
+.entrada-datos {
+  margin-bottom: 1rem;
+  --background: #f4f5f8;
+  border-radius: 10px;
+}
+
+.divisor {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+  
+  &::before, &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  span {
+    padding: 0 10px;
+    color: #888;
+    font-weight: bold;
+  }
+}
+
+.contenedor-aviso {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  
+  h2 {
+    color: var(--ion-color-primary);
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: var(--ion-color-medium);
+    margin-bottom: 2rem;
+  }
+}

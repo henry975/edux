@@ -1,0 +1,38 @@
+/* Fondo con efecto degradado */
+ion-content {
+  --background: linear-gradient(135deg, #1e293b, #0f172a); 
+}
+
+.contenedor-saludo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem;
+}
+
+.texto-maquina {
+  color: #ffffff;
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.4;
+  
+  /* Animación usando recortes (clip-path) para soportar múltiples líneas de texto */
+  clip-path: inset(0 100% 0 0);
+  animation: 
+    escribir 4s ease-out forwards,
+    borrar 3s ease-in 7s forwards; /* Comienza a borrarse a los 7 segundos */
+}
+
+/* El texto se revela de izquierda a derecha */
+@keyframes escribir {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* El texto se oculta de derecha a izquierda */
+@keyframes borrar {
+  from { clip-path: inset(0 0 0 0); }
+  to { clip-path: inset(0 100% 0 0); }
+}

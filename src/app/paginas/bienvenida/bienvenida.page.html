@@ -1,13 +1,34 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>bienvenida</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <div class="contenedor-principal">
+    
+    <div class="encabezado">
+      <h1>Edux</h1>
+      <p>Explora nuestros cursos</p>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">bienvenida</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="cuadricula-materias">
+      <div class="tarjeta-materia matematica">
+        <span>Matemática</span>
+      </div>
+      <div class="tarjeta-materia lenguaje">
+        <span>Lenguaje</span>
+      </div>
+      <div class="tarjeta-materia ciencias">
+        <span>Ciencias</span>
+      </div>
+      <div class="tarjeta-materia sociales">
+        <span>Estudios Sociales</span>
+      </div>
+    </div>
+
+    <div class="contenedor-botones">
+      <ion-button expand="block" shape="round" color="primary" routerLink="/ingreso">
+        INICIAR SESIÓN
+      </ion-button>
+      <ion-button expand="block" shape="round" fill="outline" color="primary" routerLink="/registro">
+        REGISTRARSE
+      </ion-button>
+    </div>
+
+  </div>
 </ion-content>

@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-saludo',
   templateUrl: './saludo.page.html',
   styleUrls: ['./saludo.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule]
 })
 export class SaludoPage implements OnInit {
-
-  constructor() { }
+  private enrutador = inject(Router);
 
   ngOnInit() {
+    // Temporizador de 10 segundos exactos (10000 milisegundos)
+    setTimeout(() => {
+      this.enrutador.navigate(['/bienvenida']);
+    }, 10000);
   }
-
 }
