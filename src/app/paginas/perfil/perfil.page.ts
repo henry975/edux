@@ -1,16 +1,50 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController, IonicModule } from '@ionic/angular';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../servicios/auth';
+
+// Componentes individuales de Ionic Standalone
+import { 
+  AlertController,
+  IonHeader, 
+  IonToolbar, 
+  IonButtons, 
+  IonBackButton, // Importacion agregada
+  IonButton, 
+  IonIcon, 
+  IonTitle, 
+  IonContent, 
+  IonAvatar, 
+  IonItem, 
+  IonInput 
+} from '@ionic/angular/standalone';
+
+// Herramientas para hacer visibles los iconos
+import { addIcons } from 'ionicons';
+import { chevronBack, pencil } from 'ionicons/icons';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule, CommonModule]
+  imports: [
+    CommonModule, 
+    FormsModule,
+    RouterModule,
+    IonHeader, 
+    IonToolbar, 
+    IonButtons, 
+    IonBackButton, // Registrado en los imports
+    IonButton, 
+    IonIcon, 
+    IonTitle, 
+    IonContent, 
+    IonAvatar, 
+    IonItem, 
+    IonInput
+  ]
 })
 export class PerfilPage {
   nombre: string = 'Henry';
@@ -20,6 +54,11 @@ export class PerfilPage {
   private alertaControlador = inject(AlertController);
   private servicioAuth = inject(AuthService);
   private enrutador = inject(Router);
+
+  constructor() {
+    // Hace visibles los iconos usados en el HTML
+    addIcons({ 'chevron-back': chevronBack, 'pencil': pencil });
+  }
 
   activarEdicion() {
     this.nombreTemporal = this.nombre;
@@ -54,7 +93,7 @@ export class PerfilPage {
     await alerta.present();
   }
 
-  // Despliega confirmación preventiva antes de borrar los datos de la nube
+  // Funcion agregada para resolver el error del boton de eliminar cuenta
   async intentarEliminarCuenta() {
     const alerta = await this.alertaControlador.create({
       header: 'Eliminar Cuenta',
@@ -71,7 +110,6 @@ export class PerfilPage {
               await this.servicioAuth.eliminarCuenta();
               this.mostrarAlertaExito();
             } catch (error: any) {
-              // Manejo de token expirado o inicio de sesión viejo
               this.mostrarAlerta('Seguridad', 'Por motivos de seguridad, debe volver a iniciar sesión antes de realizar esta acción.');
             }
           }
