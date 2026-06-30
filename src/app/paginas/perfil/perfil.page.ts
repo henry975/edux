@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // Necesario para el *ngIf
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../servicios/auth';
 
 @Component({
@@ -13,7 +13,7 @@ import { AuthService } from '../../servicios/auth';
   imports: [IonicModule, FormsModule, CommonModule]
 })
 export class PerfilPage {
-  nombre: string = 'Desconocido';
+  nombre: string = 'Henry';
   nombreTemporal: string = '';
   editando: boolean = false;
 
@@ -21,9 +21,8 @@ export class PerfilPage {
   private servicioAuth = inject(AuthService);
   private enrutador = inject(Router);
 
-  // Funciones para editar el nombre
   activarEdicion() {
-    this.nombreTemporal = this.nombre; // Copia el nombre actual al input
+    this.nombreTemporal = this.nombre;
     this.editando = true;
   }
 
@@ -34,7 +33,6 @@ export class PerfilPage {
     this.editando = false;
   }
 
-  // Función para cerrar sesión con ventana de confirmación
   async intentarCerrarSesion() {
     const alerta = await this.alertaControlador.create({
       header: 'Confirmación',
@@ -42,19 +40,69 @@ export class PerfilPage {
       buttons: [
         {
           text: 'CANCELAR',
-          role: 'cancel' // Role cancel cierra la alerta sin hacer nada
+          role: 'cancel'
         },
         {
           text: 'CONFIRMAR',
           handler: async () => {
-            // Si confirma, cierra sesión en Firebase y vuelve al inicio
             await this.servicioAuth.cerrarSesion();
             this.enrutador.navigate(['/bienvenida']);
           }
         }
       ]
     });
+    await alerta.present();
+  }
 
+  // Despliega confirmación preventiva antes de borrar los datos de la nube
+  async intentarEliminarCuenta() {
+    const alerta = await this.alertaControlador.create({
+      header: 'Eliminar Cuenta',
+      message: '¿Está seguro de que desea ELIMINAR su cuenta de Edux? Esta acción no se puede deshacer.',
+      buttons: [
+        {
+          text: 'CANCELAR',
+          role: 'cancel'
+        },
+        {
+          text: 'CONFIRMAR',
+          handler: async () => {
+            try {
+              await this.servicioAuth.eliminarCuenta();
+              this.mostrarAlertaExito();
+            } catch (error: any) {
+              // Manejo de token expirado o inicio de sesión viejo
+              this.mostrarAlerta('Seguridad', 'Por motivos de seguridad, debe volver a iniciar sesión antes de realizar esta acción.');
+            }
+          }
+        }
+      ]
+    });
+    await alerta.present();
+  }
+
+  async mostrarAlertaExito() {
+    const alerta = await this.alertaControlador.create({
+      header: 'Éxito',
+      message: 'Tu cuenta ha sido eliminada correctamente de la base de datos.',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.enrutador.navigate(['/bienvenida']);
+          }
+        }
+      ]
+    });
+    await alerta.present();
+  }
+
+  async mostrarAlerta(encabezado: string, mensaje: string) {
+    const alerta = await this.alertaControlador.create({
+      header: encabezado,
+      message: mensaje,
+      buttons: ['OK']
+    });
     await alerta.present();
   }
 }

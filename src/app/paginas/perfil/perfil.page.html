@@ -1,9 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button routerLink="/inicio">
-        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
-      </ion-button>
+      <ion-back-button defaultHref="/inicio" text="" icon="chevron-back"></ion-back-button>
     </ion-buttons>
     <ion-title>Perfil</ion-title>
   </ion-toolbar>
@@ -33,6 +31,10 @@
     </div>
 
     <div class="espaciador"></div>
+
+    <ion-button color="danger" fill="outline" expand="block" shape="round" class="ion-margin-bottom" (click)="intentarEliminarCuenta()">
+      ELIMINAR CUENTA
+    </ion-button>
 
     <ion-button color="danger" expand="block" shape="round" (click)="intentarCerrarSesion()">
       CERRAR SESIÓN
