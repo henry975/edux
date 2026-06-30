@@ -2,7 +2,8 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms'; 
-import { AuthService } from '../../servicios/auth.service';
+// RUTA CORREGIDA: Apunta a auth.ts
+import { AuthService } from '../../servicios/auth';
 
 @Component({
   selector: 'app-ingreso',
@@ -23,10 +24,8 @@ export class IngresoPage {
     if (!this.correo || !this.contrasena) return;
     try {
       await this.servicioAuth.ingresarConCorreo(this.correo, this.contrasena);
-      // Si las credenciales son correctas, entra a la app
       this.enrutador.navigate(['/inicio']);
     } catch (error) {
-      // Mensaje exacto de error solicitado
       this.mostrarAlerta('Error', 'Credenciales incorrectas, revíselas y vuelva a iniciar sesión.');
     }
   }

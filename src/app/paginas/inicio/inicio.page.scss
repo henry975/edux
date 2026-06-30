@@ -1,0 +1,70 @@
+.avatar-header {
+  width: 35px;
+  height: 35px;
+  margin-right: 15px;
+  cursor: pointer;
+  border: 2px solid var(--ion-color-primary);
+}
+
+.contenedor-tarjetas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+/* Lógica del Flip 3D */
+.tarjeta-flip {
+  background-color: transparent;
+  width: 100%;
+  height: 180px;
+  perspective: 1000px; /* Crea el espacio 3D */
+}
+
+.tarjeta-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+/* El giro ocurre al pasar el mouse (hover) o al tocar en el celular (active) */
+.tarjeta-flip:hover .tarjeta-inner,
+.tarjeta-flip:active .tarjeta-inner {
+  transform: rotateY(180deg);
+}
+
+.tarjeta-front, .tarjeta-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Oculta la parte trasera para Safari */
+  backface-visibility: hidden; /* Oculta la cara que no se debe ver */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Estilos de la cara frontal */
+.tarjeta-front {
+  color: white;
+  &.matematica { background-color: #3b82f6; }
+  &.lenguaje { background-color: #ef4444; }
+  &.ciencias { background-color: #10b981; }
+  &.sociales { background-color: #f59e0b; }
+}
+
+/* Estilos de la cara trasera */
+.tarjeta-back {
+  background-color: #1e293b;
+  color: white;
+  transform: rotateY(180deg); /* Esta cara ya está volteada por defecto */
+  
+  p { font-size: 0.95rem; line-height: 1.4; }
+}

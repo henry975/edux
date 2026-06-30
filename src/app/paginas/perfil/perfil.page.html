@@ -1,13 +1,42 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>perfil</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/inicio">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding ion-text-center">
+  <div class="contenedor-perfil">
+    
+    <ion-avatar class="avatar-grande">
+      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Silueta Humana" />
+    </ion-avatar>
+
+    <div class="seccion-nombre" *ngIf="!editando">
+      <h2>
+        {{ nombre }} 
+        <ion-icon name="pencil" class="icono-lapiz" (click)="activarEdicion()"></ion-icon>
+      </h2>
+    </div>
+
+    <div class="seccion-edicion" *ngIf="editando">
+      <ion-item class="entrada-nombre">
+        <ion-input [(ngModel)]="nombreTemporal" placeholder="Ingresa tu nombre"></ion-input>
+      </ion-item>
+      <ion-button color="success" shape="round" (click)="guardarNombre()">
+        GUARDAR
+      </ion-button>
+    </div>
+
+    <div class="espaciador"></div>
+
+    <ion-button color="danger" expand="block" shape="round" (click)="intentarCerrarSesion()">
+      CERRAR SESIÓN
+    </ion-button>
+
+  </div>
 </ion-content>

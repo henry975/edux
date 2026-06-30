@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms'; // Necesario para los inputs
-import { AuthService } from '../../servicios/auth.service';
+import { FormsModule } from '@angular/forms'; 
+// RUTA CORREGIDA: Apunta a auth.ts
+import { AuthService } from '../../servicios/auth';
 
 @Component({
   selector: 'app-registro',
@@ -23,7 +24,6 @@ export class RegistroPage {
     if (!this.correo || !this.contrasena) return;
     try {
       await this.servicioAuth.registrarConCorreo(this.correo, this.contrasena);
-      // Si el registro es exitoso, lo enviamos a la pantalla de aviso de verificación
       this.enrutador.navigate(['/verificacion']);
     } catch (error) {
       this.mostrarAlerta('Error', 'No se pudo registrar. Verifica los datos o intenta con otro correo.');
@@ -33,7 +33,6 @@ export class RegistroPage {
   async registrarConGoogle() {
     try {
       await this.servicioAuth.ingresarConGoogle();
-      // Con Google no hace falta verificar correo, entra directo a inicio
       this.enrutador.navigate(['/inicio']);
     } catch (error) {
       this.mostrarAlerta('Error', 'Ocurrió un problema al conectar con Google.');

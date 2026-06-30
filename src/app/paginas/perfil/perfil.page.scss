@@ -1,0 +1,46 @@
+.contenedor-perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding-top: 2rem;
+}
+
+.avatar-grande {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.seccion-nombre {
+  h2 {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-dark);
+  }
+
+  .icono-lapiz {
+    margin-left: 10px;
+    font-size: 1.5rem;
+    color: var(--ion-color-primary);
+    cursor: pointer;
+  }
+}
+
+.seccion-edicion {
+  width: 100%;
+  max-width: 300px;
+  
+  .entrada-nombre {
+    margin-bottom: 1rem;
+    --background: #f4f5f8;
+    border-radius: 8px;
+  }
+}
+
+.espaciador {
+  flex-grow: 1; /* Esto empuja el botón de cerrar sesión hacia la parte inferior */
+}
